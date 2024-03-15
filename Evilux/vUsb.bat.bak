@@ -1,0 +1,655 @@
+@echo off
+setlocal enabledelayedexpansion
+chcp 65001
+title vUSB
+set di=C:\Evilux\%username%\Desktop\VirtualUSB
+set fd=%cd%
+cd VirtualUSB
+goto usb0
+REM                                                                    [41m
+:usb0
+cd %fd%\VirtualUSB
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "3" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mFiles :[41;37m 
+dir /b /a-d
+echo.
+echo [0m[47;30m  Copy  Generate VerifyData                                                                                            [41m
+choice /C 123 /N
+if %errorlevel% EQU 1 goto usb1
+if %errorlevel% EQU 2 goto usb2
+goto usb0
+
+:usb1
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "3" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mFiles :[41;37m 
+dir /b /a-d
+echo.
+echo [0m[47;30m [100m Copy [0m[47;30m Generate VerifyData                                                                                             [41m
+choice /C 123 /N
+if %errorlevel% EQU 1 goto usb1
+if %errorlevel% EQU 2 goto usb2
+if %errorlevel% EQU 3 goto cp
+goto usb0
+
+:usb2
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "3" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mFiles :[41;37m 
+dir /b /a-d
+echo.
+echo [0m[47;30m  Copy [100m Generate VerifyData [0m[47;30m                                                                                            [41m
+choice /C 1234 /N
+if %errorlevel% EQU 1 goto usb1
+if %errorlevel% EQU 2 goto usb2
+if %errorlevel% EQU 3 goto gVerC
+goto usb0
+
+:gVerC
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "3" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mWrite menu to go back [41;37m
+set /p fold=[0m[47;30mWich Folder : [41;37m
+if %fold% EQU menu goto usb0
+goto gVerCc
+
+:gVerCc
+set fold=%fold%
+cd %fold%
+if not exist VerifyData.ev goto gen
+goto usb0
+
+:gen
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name : %name1%                        [0m
+set /p name1=[0m[47;30mYour Name : [41;37m
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name : %name1%                        [0m
+echo [47;30m    Type : %cr%                           [0m
+set /p cr=[0m[47;30mType : [41;37m
+goto gen1
+
+:gen1
+color 40
+cls
+echo.
+echo [0m[47;30m0=preAlpha 1=Beta 2=Gamma 3=Full 4=Demo [41m
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name   : %name1%                      [0m
+echo [47;30m    Type   : %cr%                         [0m
+echo [47;30m    Version: %vers%                       [0m
+set /p a=[0m[47;30mVersion [41;37m
+if %a% EQU 0 goto pre
+if %a% EQU 1 goto bet
+if %a% EQU 2 goto gam
+if %a% EQU 3 goto full
+if %a% EQU 4 goto demo
+goto gen1
+
+:pre
+set vers=preAlpha
+goto gen2
+
+:bet
+set vers=Beta
+goto gen2
+
+:gam
+set vers=Gamma
+goto gen2
+
+:full
+set vers=Full
+goto gen2
+
+:demo
+set vers=Demo
+goto gen2
+
+:gen2
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name   : %name1%                      [0m
+echo [47;30m    Type   : %cr%                         [0m
+echo [47;30m    Version: %vers%                       [0m
+echo [47;30m    Proved!                               [0m
+ping localhost -n 3 > NUL
+(
+  echo %name1%
+  echo %cr%
+  echo %vers%
+  
+) > VerifyData.ev
+goto gen3
+
+:gen3
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name   : %name1%                      [0m
+echo [47;30m    Type   : %cr%                         [0m
+echo [47;30m    Version: %vers%                       [0m
+echo [47;30m    Proved!                               [0m
+echo [47;30m    Generate Info.ev too?[Only for vmOS]  [0m
+echo [47;30m    Yes [1] # No [2]                      [0m
+set /p a=
+if %a% EQU 1 goto genInf
+if %a% EQU 2 goto usb0
+goto gen3
+
+:genInf
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name   : %osname%                     [0m
+set /p osname=set /p a=[0m[47;30mOS Name : [41;37m
+goto genInf1
+
+:genInf1
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name   : %osname%                     [0m
+echo [47;30m    Version: %version2%                   [0m
+set /p version2=[0m[47;30mVersion : [41;37m
+goto genInf2
+
+:genInf2
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name   : %osname%                     [0m
+echo [47;30m    Version: %version2%                   [0m
+echo [47;30m    Dev    : %dev%                        [0m
+set /p dev=[0m[47;30mDeveloper : [41;37m
+goto generate
+
+:generate
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Name   : %osname%                     [0m
+echo [47;30m    Version: %version2%                   [0m
+echo [47;30m    Dev    : %dev%                        [0m
+ping localhost -n 3 > NUL
+(
+  echo %osname%
+  echo %version2%
+  echo %dev%
+  
+) > Info.ev
+goto usb0
+
+
+
+:cp
+cd %fd%
+goto cp0
+
+:cp0
+color 40
+cls
+echo.
+echo.
+echo [0m[47;30mSelect with "4" [41;37m 
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                            [47;30m┏━━━━━━━━━━━━━━━━[vUSB]━━━━━━━━━━━━━━━━┓[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃          Copy in Directory           ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃              Copy File               ┃[0m
+echo [41m                                           [0m[47;30m┃            Copy Directory            ┃[0m
+echo [41m                                           [0m[47;30m┃                Cancel                ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [47;30m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+choice /C 1234 /N
+if %errorlevel% EQU 1 goto cp1
+if %errorlevel% EQU 2 goto cp2
+if %errorlevel% EQU 3 goto cp3
+goto cp0
+
+:cp1
+color 40
+cls
+echo.
+echo.
+echo [0m[47;30mSelect with "4" [41;37m 
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                            [47;30m┏━━━━━━━━━━━━━━━━[vUSB]━━━━━━━━━━━━━━━━┓[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃          Copy in Directory           ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃             [100m Copy File [0m[47;30m              ┃[0m
+echo [41m                                           [0m[47;30m┃            Copy Directory            ┃[0m
+echo [41m                                           [0m[47;30m┃                Cancel                ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [47;30m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+choice /C 1234 /N
+if %errorlevel% EQU 1 goto cp1
+if %errorlevel% EQU 2 goto cp2
+if %errorlevel% EQU 3 goto cp3
+if %errorlevel% EQU 4 goto xcp
+goto cp1
+
+:cp2
+color 40
+cls
+echo.
+echo.
+echo [0m[47;30mSelect with "4" [41;37m 
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                            [47;30m┏━━━━━━━━━━━━━━━━[vUSB]━━━━━━━━━━━━━━━━┓[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃          Copy in Directory           ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃              Copy File               ┃[0m
+echo [41m                                           [0m[47;30m┃           [100m Copy Directory [0m[47;30m           ┃[0m
+echo [41m                                           [0m[47;30m┃                Cancel                ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [47;30m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+choice /C 1234 /N
+if %errorlevel% EQU 1 goto cp1
+if %errorlevel% EQU 2 goto cp2
+if %errorlevel% EQU 3 goto cp3
+if %errorlevel% EQU 4 goto rcp
+goto cp2
+
+:cp3
+color 40
+cls
+echo.
+echo.
+echo [0m[47;30mSelect with "4" [41;37m 
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                            [47;30m┏━━━━━━━━━━━━━━━━[vUSB]━━━━━━━━━━━━━━━━┓[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃          Copy in Directory           ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃              Copy File               ┃[0m
+echo [41m                                           [0m[47;30m┃            Copy Directory            ┃[0m
+echo [41m                                           [0m[47;30m┃               [100m Cancel [0m[47;30m               ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [47;30m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+choice /C 1234 /N
+if %errorlevel% EQU 1 goto cp1
+if %errorlevel% EQU 2 goto cp2
+if %errorlevel% EQU 3 goto cp3
+if %errorlevel% EQU 4 goto usb0
+goto cp0
+
+REM pushd goes to start dir
+REM popd goes to last dir
+color 47
+cls
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo                                            [47;30m┏━━━━━━━━━━━━━━━━[vUSB]━━━━━━━━━━━━━━━━┓[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃          Copy in Directory           ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [0m[47;30m┃                                      ┃[0m
+echo [41m                                           [47;30m┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+pause
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "5" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mFiles :[41;37m 
+dir /b /a-d
+echo.
+echo [0m[47;30mCopy 
+
+:xcp
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "Keyboard" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mChoose A Folder[41;37m
+echo [0m[47;30mWhen done write sel[41;37m 
+echo [0m[47;30mWrite def for default Evilux Folder[41;37m 
+echo [0m[47;30mWrite back for go back to Evilux Folder[41;37m 
+echo [0m[47;30mWrite menu for cancel process[41;37m 
+set /p a=[0m[47;30mChoose A Folder : [41;37m
+if %a% EQU sel goto xcp1
+if %a% EQU def goto xcp#
+if %a% EQU back cd %fd%
+if %a% EQU menu goto usb0
+cd %a%
+set frcd=%cd%
+goto xcp
+
+:xcp#
+set frcd=%cd%
+goto xcp1
+
+:xcp1
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "Keyboard" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFiles :[41;37m 
+dir /b /a-d
+echo.
+echo [0m[47;30mWrite menu for cancel process[41;37m
+set /p a=[0m[47;30mChoose A File : [41;37m
+if %a% EQU menu goto usb0
+set file=%a%
+goto xcpc
+
+:xcpc
+set file=%file%
+if not exist %file% goto xcp1
+goto xcp2
+
+:xcp2
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "Keyboard" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mIn wich Folder do you want to copy %file%[41;37m 
+echo [0m[47;30mWhen done write sel[41;37m 
+echo [0m[47;30mWrite def for default Evilux Folder[41;37m 
+echo [0m[47;30mWrite back for go back to Evilux Folder[41;37m 
+echo [0m[47;30mWrite menu for cancel process[41;37m 
+set /p a=[0m[47;30mChoose A Folder : [41;37m
+if %a% EQU sel goto xcp3
+if %a% EQU def goto xcp2#
+if %a% EQU back cd %fd%
+if %a% EQU menu goto usb0
+cd %a% 
+set xccd=%cd%
+goto xcp2
+
+:xcp2#
+set xccd=%cd%
+goto xcp3
+
+:xcp3
+color 40
+xcopy %frcd%\%file% %xccd%
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying                               [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying.                              [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying..                             [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying...                            [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying...                            [0m
+echo [47;30m    Done                                  [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying...                            [0m
+echo [47;30m    Done                                  [0m
+echo [47;30m    Copied %file% in Folder : %xccd%      [0m
+echo [47;30m   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+echo [47;30m Press any Key to Continue [0m
+pause > nul
+goto usb0
+
+
+:rcp
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "Keyboard" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mChoose A Folder[41;37m
+echo [0m[47;30mWhen done write sel[41;37m 
+echo [0m[47;30mWrite def for default Evilux Folder[41;37m 
+echo [0m[47;30mWrite back for go back to Evilux Folder[41;37m 
+echo [0m[47;30mWrite menu for cancel process[41;37m 
+set /p a=[0m[47;30mChoose A Folder : [41;37m
+if %a% EQU sel goto rcp2
+if %a% EQU def goto rcp#
+if %a% EQU back cd %fd%
+if %a% EQU menu goto usb0
+cd %a%
+set frcd=%cd%
+goto rcp
+
+:rcp#
+set frcd=%cd%
+goto rcp2
+
+:rcp2
+color 47
+cls
+echo                                                     [0m[47;30mvUsb.exe
+echo [0m[47;30mSelect with "Keyboard" [41;37m 
+echo [0m[47;30mDirectory : %cd% [41m
+echo.
+echo [0m[47;30mFolders :[41;37m 
+dir /b /A:D
+echo.
+echo [0m[47;30mIn wich Folder do you want to copy %frcd%[41;37m 
+echo [0m[47;30mWhen done write sel[41;37m 
+echo [0m[47;30mWrite def for default Evilux Folder[41;37m 
+echo [0m[47;30mWrite back for go back to Evilux Folder[41;37m 
+echo [0m[47;30mWrite menu for cancel process[41;37m 
+set /p a=[0m[47;30mChoose A Folder : [41;37m
+if %a% EQU sel goto rcp3
+if %a% EQU def goto rcp2#
+if %a% EQU back cd %fd%
+if %a% EQU menu goto usb0
+cd %a% 
+set xccd=%cd%
+goto rcp2
+
+:rcp2#
+set xccd=%cd%
+goto rcp3
+
+:rcp3
+color 40
+ROBOCOPY "%frcd%" "%xccd%" /mir
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying                               [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying.                              [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying..                             [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying...                            [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying...                            [0m
+echo [47;30m    Done                                  [0m
+ping localhost -n 2 > NUL
+color 40
+cls
+echo.
+echo.
+echo.
+echo [47;30m   ┏━━━━━━━━━━━━━━━━[Log]━━━━━━━━━━━━━━━━┓[0m
+echo [47;30m    Copying...                            [0m
+echo [47;30m    Done                                  [0m
+echo [47;30m    Copied %file% in Folder : %xccd%      [0m
+echo [47;30m   ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛[0m
+echo [47;30m Press any Key to Continue [0m
+pause > nul
+goto usb0
+
+
+
